@@ -1,3 +1,16 @@
-*{
+.login{
+    width: 100vw;
+    height: 100vh;
     background-color: #4A92D4;
+    padding-top: 20vh;
+}
+.card{
+    width: 30vw;
+    margin: auto auto;
+    background-color: white;
+    padding: 3rem;
+    text-align: right;
+}
+.heading{
+    text-align: start;
 }
