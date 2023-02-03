@@ -1,6 +1,13 @@
-const Dashboard = () => {
+import { Button } from "@chakra-ui/react";
+
+const Dashboard = (props) => {
+    const onLogOutClick = () => {
+        props.onLogout(null)
+    }
     return (
-        <div></div>
+        <div><h1>Dashboard</h1>
+        <Button onClick={onLogOutClick}>LogOut</Button>
+        </div>
     )
 };
 

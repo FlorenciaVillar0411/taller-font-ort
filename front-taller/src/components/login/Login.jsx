@@ -1,7 +1,14 @@
 import "./Login.css"
 import { Card, CardHeader, CardBody, CardFooter, Stack, Box, Text, Heading, Input, Button, Link } from '@chakra-ui/react'
 
-const Login = () => {
+const Login = (props) => {
+
+    const onLogInClick = () => {
+        props.onLogin({
+            user: 'flor',
+            apiKey: '',
+        })
+    }
 return <div class="login">
     <Card class='card'>
         <CardHeader class="heading"><Heading>Log in</Heading></CardHeader>
@@ -10,11 +17,11 @@ return <div class="login">
                 <br/>
                 <Input type="text" placeholder="username"/>
                 <br/>
-                <Input type="text" placeholder="password"/>
+                <Input type="password" placeholder="password"/>
                 <br/>
                 <Text>Not Registered? <Link color='teal.500'>Register</Link></Text>
                 <br/>
-                <Button type="submit" >Submit</Button>
+                <Button onClick={onLogInClick}>Submit</Button>
             </Stack>
         </CardBody>
     </Card>
