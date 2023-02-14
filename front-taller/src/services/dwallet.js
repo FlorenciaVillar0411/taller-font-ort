@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const BASE_URL = 'https://dwallet.develotion.com/';
 
 const login = async (user, pass) => {
@@ -76,3 +78,5 @@ const manejarRespuesta = (res) => {
         });
       }
 }
+
+export { login, registro, getCiudades, getDeptos, getMovimientos, postMovimiento, getRubros };

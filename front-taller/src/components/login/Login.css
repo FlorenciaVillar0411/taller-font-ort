@@ -15,3 +15,6 @@
 .heading{
     text-align: start;
 }
+p.error{
+    color:red;
+}
