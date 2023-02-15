@@ -48,7 +48,7 @@ const Login = (props) => {
     };
 
    
-    if (userName !== "" && password !== "" && password.trim().length >= 8 /*&& password.includes('')*/) {
+    if (userName && password) {
         //esto es para que mientras se este enviando el boton quede deshabilitado
         setDesactivado(true)
       const data = await login(userName, password);
@@ -63,7 +63,7 @@ const Login = (props) => {
     }
   };
   return (
-    <div class="login">
+    <div class="Login">
       <Card class="card">
         <CardHeader class="heading">
           <Heading>Log in</Heading>

@@ -5,21 +5,13 @@ import Login from '../login/Login';
 import Dashboard from '../dashboard/Dashboard';
 import { ChakraProvider } from '@chakra-ui/react'
 //import Registry from '../registry/Registry';
-import { useState } from 'react';
+import { useSelector } from 'react-redux'
 import AddForm from '../dashboard/addForm/addForm';
 
 
 
 const App = () => {
 
-  const [loggedUser, setLoggedUser] = useState(null);
-
-  const onLogin = user => {
-    setLoggedUser(user);
-  }
-  const onLogout = () => {
-    setLoggedUser(null);
-  }
 
   
   /*const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,10 +32,11 @@ const App = () => {
     localStorage.removeItem('isLoggedIn', '1');
     setIsLoggedIn(false);
   }*/
+  const loggedUser = useSelector(state => state.user.loggedUser)
 
   return (
     <ChakraProvider className="App">
-      {loggedUser ? <Dashboard onLogout={onLogout}/> : <Login onLogin={onLogin}/>}
+      {loggedUser ? <Dashboard/> : <Login/>}
       {/*{loggedUser ? <Dashboard user={loggedUser}/> : <Login onLogin={onLogin}/>}*/}
     </ChakraProvider>
   );

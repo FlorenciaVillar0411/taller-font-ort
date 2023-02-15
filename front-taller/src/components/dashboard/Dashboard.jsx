@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import AddForm from "./addForm/addForm";
-import Add from "./add/add";
+import { useDispatch } from 'react-redux'
+import { setLogoutUser } from "../../app/slices/userSlice";
 //import { useEffect, useState } from "react";
 //import { getMovimientos } from "../../services/dwallet";
 //import MovimientosFilter from './filter/Filter
@@ -31,13 +32,14 @@ const Dashboard = (props, user) => {
     }
   }*/
 
+  const dispatch = useDispatch();
+
   const onLogOutClick = () => {
-    props.onLogout(null);
-  };
+    dispatch(setLogoutUser())
+  }
 
   return (
     <div>
-      <h1>Dashboard</h1>
       <AddForm></AddForm>
       <Button onClick={onLogOutClick}>LogOut</Button>
       {/*<GetMovimientos onFilter={onFilterMovimientos} />*/}
