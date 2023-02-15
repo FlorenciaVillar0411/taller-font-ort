@@ -10,7 +10,7 @@ import AddForm from '../dashboard/addForm/addForm';
 
 
 
-function App() {
+const App = () => {
 
   const [loggedUser, setLoggedUser] = useState(null);
 
@@ -42,7 +42,7 @@ function App() {
   }*/
 
   return (
-    <ChakraProvider>
+    <ChakraProvider className="App">
       {loggedUser ? <Dashboard onLogout={onLogout}/> : <Login onLogin={onLogin}/>}
       {/*{loggedUser ? <Dashboard user={loggedUser}/> : <Login onLogin={onLogin}/>}*/}
     </ChakraProvider>

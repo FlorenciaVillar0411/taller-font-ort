@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { login } from "../../services/dwallet";
+import { useDispatch } from 'react-redux'
+import { setLoginUser } from '../../app/slices/userSlice'
 import "./Login.css";
 import {
   Card,
@@ -19,6 +21,8 @@ const Login = (props) => {
 
   const inputUsername = useRef();
   const inputPassword = useRef();
+  const dispatch = useDispatch();
+
 
   const validarForm = () => {
     const userName = inputUsername.current.value;
@@ -32,7 +36,7 @@ const Login = (props) => {
     }
   };
 
-  const onLogInClick = ({ onLogin }) => {
+  const onLogInClick = async ({ onLogin }) => {
     const userName = inputUsername.current.value;
     const password = inputPassword.current.value;
 
@@ -47,24 +51,16 @@ const Login = (props) => {
     if (userName !== "" && password !== "" && password.trim().length >= 8 /*&& password.includes('')*/) {
         //esto es para que mientras se este enviando el boton quede deshabilitado
         setDesactivado(true)
-      login(userName, password)
-        .then((data) => {
-          onLogin({
-            id: data.id,
-            apiKey: data.apiKey,
-          });
+      const data = await login(userName, password);
+      dispatch(
+        setLoginUser({
+          id: data.id,
+          apiKey: data.apiKey
         })
-        .catch((e) => {
-          mostrarError();
-        });
+          )
     } else {
       mostrarError();
     }
-
-    props.onLogin({
-    user: "flor",
-    apiKey: "",
-    });
   };
   return (
     <div class="login">
