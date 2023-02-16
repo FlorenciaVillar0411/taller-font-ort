@@ -7,4 +7,4 @@ const Movimientos = (props) => {
     </Box>
   );
 };
-export default AddForm;
+export default Movimientos;

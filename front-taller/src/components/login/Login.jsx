@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
-import { login } from "../../services/dwallet";
-import { useDispatch } from 'react-redux'
-import { setLoginUser } from '../../app/slices/userSlice'
-import "./Login.css";
+import { useRef, useState } from 'react';
+import { login } from '../../services/dwallet';
+import { useDispatch } from 'react-redux';
+import { setLoginUser } from '../../app/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
+
+import './Login.css';
 import {
   Card,
   CardHeader,
@@ -13,7 +15,7 @@ import {
   Input,
   Button,
   Link,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const Login = (props) => {
   const [error, setError] = useState();
@@ -22,17 +24,16 @@ const Login = (props) => {
   const inputUsername = useRef();
   const inputPassword = useRef();
   const dispatch = useDispatch();
-
+  const navigator = useNavigate();
 
   const validarForm = () => {
     const userName = inputUsername.current.value;
     const password = inputPassword.current.value;
 
-    if (userName !== "" && password !== ""){ 
+    if (userName !== '' && password !== '') {
       setDesactivado(false);
-    }
-    else{
-        setDesactivado(true);
+    } else {
+      setDesactivado(true);
     }
   };
 
@@ -47,23 +48,23 @@ const Login = (props) => {
       }, 4500);
     };
 
-   
     if (userName && password) {
-        //esto es para que mientras se este enviando el boton quede deshabilitado
-        setDesactivado(true)
+      //esto es para que mientras se este enviando el boton quede deshabilitado
+      setDesactivado(true);
       const data = await login(userName, password);
       dispatch(
         setLoginUser({
           id: data.id,
-          apiKey: data.apiKey
+          apiKey: data.apiKey,
         })
-          )
+      );
+      navigator('/dashboard');
     } else {
       mostrarError();
     }
   };
   return (
-    <div class="Login">
+    <div className="Login">
       <Card class="card">
         <CardHeader class="heading">
           <Heading>Log in</Heading>
@@ -75,19 +76,27 @@ const Login = (props) => {
               type="text"
               placeholder="username"
               ref={inputUsername}
-              onChange={ validarForm }
+              onChange={validarForm}
             />
             <br />
-            <Input type="password" placeholder="password" ref={inputPassword} onChange={ validarForm } />
+            <Input
+              type="password"
+              placeholder="password"
+              ref={inputPassword}
+              onChange={validarForm}
+            />
             <br />
             <Text>
-              Not Registered? <Link color="teal.500">Register</Link>
+              Not Registered?{' '}
+              <Link color="teal.500" href="/registro">
+                Register
+              </Link>
             </Text>
             <br />
-            <Button onClick={onLogInClick} disabled={btnDesactivado} >
+            <Button onClick={onLogInClick} disabled={btnDesactivado}>
               Submit
             </Button>
-            {error ? <p className="error"> Se ha producido un error</p> : ""}
+            {error ? <p className="error"> Se ha producido un error</p> : ''}
           </Stack>
         </CardBody>
       </Card>
