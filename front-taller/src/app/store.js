@@ -4,6 +4,7 @@ import movisSlice from './slices/movisSlice';
 
 export const store = configureStore({
   reducer: {
-    user: userSlice
+    user: userSlice,
+    movis: movisSlice,
   },
 });

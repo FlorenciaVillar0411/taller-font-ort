@@ -1,17 +1,42 @@
-// import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  movimientos: [],
+  filteredMovimientos: [],
+};
 
-// export const movisSlice = createSlice({ 
-//     name: 'movis',
-//     initialState,
-//     reducers: {
-//         setMovimientos: (state, action) => { //necesito el payload xq necesito que al invocar me envien esa lista 
-//             const { payload } = action; 
-//             state.movis = payload;
-//             state.filteredMovs = payload; //con esto setee el estado 
-//         },
-//     },
-// });
+const movisSlice = createSlice({
+  name: 'movimientos',
+  initialState,
+  reducers: {
+    setMovimientos: (state, action) => {
+      const { payload } = action;
+      state.movimientos = payload;
+    },
+    setFilteredMovimientos: (state, action) => {
+      const { payload } = action;
+      state.filteredMovimientos = payload;
+    },
+    addMovimiento: (state, action) => {
+      const { payload } = action;
+      state.movimientos = [...state.movimientos, payload];
+      state.filteredMovimientos = [...state.filteredMovimientos, payload];
+    },
+    deleteMovimientoById: (state, action) => {
+      const { payload } = action;
+      const newmovimientoList = state.movimientos.filter(
+        (mov) => mov.id !== payload
+      );
+      state.movimientos = newmovimientoList;
+      state.filteredMovimientos = newmovimientoList;
+    },
+  },
+});
 
-// export const { setMovimientos } = movisSlice.actions;
-// export default movisSlice.reducer
+export const {
+  setMovimientos,
+  setFilteredMovimientos,
+  addMovimiento,
+  deleteMovimientoById,
+} = movisSlice.actions;
+export default movisSlice.reducer;

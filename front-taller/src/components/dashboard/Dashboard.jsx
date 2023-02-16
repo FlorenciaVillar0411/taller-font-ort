@@ -1,28 +1,30 @@
 import { Button } from "@chakra-ui/react";
 import AddForm from "./addForm/addForm";
+import Movimientos from './movimientos/Movimientos';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { setLogoutUser } from "../../app/slices/userSlice";
-//import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getMovimientos } from "../../services/dwallet";
-import MovimientosTable from './movimientosTable/MovimientosTable'
-import MovimientosFilter from './filter/Filter'
-import { useEffect, useState } from 'react'
+import MovimientosFilter from './filter/Filter;
+import MovimientosTable from './movimientosTable/MovimientosTable';
 
 const Dashboard = (props, user) => {
 
-  const [movimientos, setMovimientos] = useState([]) //ESTE ES EL ORIGINAL
-  const [MovimientosFiltered, setFilteredMovimientos] = useState([]) //ESTA ES LA LISTA FILTRADA
 
-  useEffect(() => {
+  //const [movimientos, setMovimientos] = useState([]) ESTE ES EL ORIGINAL
+  //const [MovimientosFiltered, setFilteredMovimientos] = useState([]) ESTA ES LA LISTA FILTRADA
 
-  getMovimientos(user.idUsuario, user.token).then(data => {
-        setMovimientos(data)
-    })
-    .catch(e => console.error('Se ha producido un error'))
-  }, []);
+  //useEffect(() => {
 
-  const onFilterMovimientos = filter => {
-    if(filter == "gastos"){
+  //getMovimientos(user.idUsuario, user.token).then(data => {
+        //setMovimientos(data)
+   // })
+    //.catch(e => console.error('Se ha producido un error'))
+  //}, []);
+
+  //const onFilterMovimientos = filter => {
+    /*if(filter == "gastos"){
       const gastos = movimientos.filter(gastoMov => !gastoMov.ingresos)
       setFilteredMovimientos(gastos)
     }else if(filter == "inversiones"){
@@ -31,21 +33,21 @@ const Dashboard = (props, user) => {
     }else {
       setFilteredMovimientos(movimientos)
     }
-  }
+  }*/
 
   const dispatch = useDispatch();
+  const navigator = useNavigate();
 
   const onLogOutClick = () => {
-    dispatch(setLogoutUser())
-  }
+    dispatch(setLogoutUser());
+    navigator('/login');
+  };
 
   return (
     <div>
       <h1>Dashboard</h1>
       <AddForm></AddForm>
       <Button onClick={onLogOutClick}>LogOut</Button>
-      <MovimientosTable></MovimientosTable>
-      <MovimientosFilter onFilter={onFilterMovimientos} />
       {/*<GetMovimientos onFilter={onFilterMovimientos} />*/}
       {/*movimientos.length > 0 ? (< MovimientosFilter movimientos={MovimientosFiltered} /> ) : ('Cargando...')} */}
     </div>
