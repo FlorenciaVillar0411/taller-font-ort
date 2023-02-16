@@ -16,6 +16,8 @@ const getFromLocalStorage = (key) => {
   const clearLocalStorage = () => {
     localStorage.clear();
   };
+
+  
   export {
     setInLocalStorage,
     getFromLocalStorage,

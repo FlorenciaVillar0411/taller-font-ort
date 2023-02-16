@@ -28,6 +28,7 @@ const Login = (props) => {
     const userName = inputUsername.current.value;
     const password = inputPassword.current.value;
 
+    //hay que hacer una mejor validacion
     if (userName !== "" && password !== ""){ 
       setDesactivado(false);
     }
@@ -35,6 +36,8 @@ const Login = (props) => {
         setDesactivado(true);
     }
   };
+
+
 
   const onLogInClick = async ({ onLogin }) => {
     const userName = inputUsername.current.value;
