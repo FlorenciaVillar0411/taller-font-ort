@@ -51,7 +51,7 @@ const getMovimientos = async (idUsuario, token) => {
     `${BASE_URL}/movimientos.php?idUsuario=${idUsuario}`,
     { headers }
   );
-  return manejarRespuesta(res);
+  return res.data.movimientos;
 };
 
 const postMovimiento = async (movimiento, token) => {
