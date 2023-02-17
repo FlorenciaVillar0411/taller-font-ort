@@ -8,6 +8,8 @@ import {
 
 const initialState = {
   loggedUser: getFromLocalStorage('appUser'),
+  deptos: [],
+  ciudades: [],
 };
 
 export const userSlice = createSlice({
@@ -23,8 +25,17 @@ export const userSlice = createSlice({
       state.loggedUser = null;
       removeFromLocalStorage('appUser');
     },
+    setDeptos: (state, action) => {
+      const { payload } = action;
+      state.deptos = payload;
+    },
+    setCiudades: (state, action) => {
+      const { payload } = action;
+      state.ciudades = payload;
+    },
   },
 });
 
-export const { setLoginUser, setLogoutUser } = userSlice.actions;
+export const { setLoginUser, setLogoutUser, setDeptos, setCiudades } =
+  userSlice.actions;
 export default userSlice.reducer;
