@@ -4,10 +4,9 @@ import Movimientos from './movimientos/Movimientos';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { setLogoutUser } from "../../app/slices/userSlice";
-import { useEffect, useState } from "react";
 import { getMovimientos } from "../../services/dwallet";
-import MovimientosFilter from './filter/Filter;
 import MovimientosTable from './movimientosTable/MovimientosTable';
+//import {useEffect, useState} from 'react';
 
 const Dashboard = (props, user) => {
 
@@ -47,6 +46,7 @@ const Dashboard = (props, user) => {
     <div>
       <h1>Dashboard</h1>
       <AddForm></AddForm>
+      <Movimientos></Movimientos>
       <Button onClick={onLogOutClick}>LogOut</Button>
       {/*<GetMovimientos onFilter={onFilterMovimientos} />*/}
       {/*movimientos.length > 0 ? (< MovimientosFilter movimientos={MovimientosFiltered} /> ) : ('Cargando...')} */}
