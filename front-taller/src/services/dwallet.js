@@ -61,13 +61,13 @@ const postMovimiento = async (movimiento, token) => {
     movimiento,
     { headers }
   );
-  return manejarRespuesta(res);
+  return res.data;
 };
 
 const getRubros = async (token) => {
   const headers = getHeaders(token);
   const res = await axios.get(`${BASE_URL}/rubros.php`, { headers });
-  return manejarRespuesta(res);
+  return res.data.rubros;
 };
 
 const getHeaders = (token) => {

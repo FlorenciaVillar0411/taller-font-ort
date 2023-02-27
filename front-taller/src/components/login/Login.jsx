@@ -64,7 +64,7 @@ const Login = (props) => {
     }
   };
   return (
-    <div className="Login">
+    <div className="login">
       <Card class="card">
         <CardHeader class="heading">
           <Heading>Log in</Heading>

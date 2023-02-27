@@ -10,26 +10,32 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
-import { setMovimientos } from '../../../app/slices/movisSlice';
-import { getMovimientos, getDeptos, registro } from '../../../services/dwallet';
+import { setFilteredMovimientos, setMovimientos, setRubros } from '../../../app/slices/movisSlice';
+import { getMovimientos, getRubros, registro } from '../../../services/dwallet';
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Filter from './filter/Filter';
 
 const Movimientos = (props) => {
-  const movis = useSelector((state) => state.movis.movimientos);
+  const movis = useSelector((state) => state.movis.filteredMovimientos);
   const user = useSelector((state) => state.user.loggedUser);
+  const rubrosState = useSelector((state) => state.movis.rubros);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getMovimientosApi = async () => {
-      const arr = [];
-      console.log(user);
+      const movs = [];
       const movis = await getMovimientos(user.id, user.apiKey);
-      movis.map((x) => {
-        return arr.push(x);
+      const rubros = rubrosState.lenght > 0 ? rubrosState : await getRubros(user.apiKey);
+      movis.map((m) => {
+        m.rubro = rubros.find(r => r.id === m.categoria).nombre;
+        return movs.push(m);
       });
-      dispatch(setMovimientos(arr));
+      dispatch(setMovimientos(movs));
+      dispatch(setFilteredMovimientos(movs));
+      dispatch(setRubros(rubros));
+      console.log(movis);
     };
     getMovimientosApi();
   }, []);
@@ -37,10 +43,12 @@ const Movimientos = (props) => {
   return (
     <Box>
       <Heading>Movimientos</Heading>
+      {movis ? <Filter></Filter> : ''}
       <Table className="audit table">
         <Thead className="table-th">
           <Tr>
             <Th>Concepto</Th>
+            <Th>Rubro</Th>
             <Th>Total</Th>
             <Th>Medio</Th>
             <Th>Fecha</Th>
@@ -50,6 +58,7 @@ const Movimientos = (props) => {
           {movis.map((m) => (
             <Tr>
               <Td>{m.concepto}</Td>
+              <Td>{m.rubro}</Td>
               <Td>{m.total}</Td>
               <Td>{m.medio}</Td>
               <Td>{m.fecha}</Td>

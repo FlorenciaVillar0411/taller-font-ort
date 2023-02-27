@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   movimientos: [],
   filteredMovimientos: [],
+  rubros: [],
 };
 
 const movisSlice = createSlice({
@@ -30,6 +31,10 @@ const movisSlice = createSlice({
       state.movimientos = newmovimientoList;
       state.filteredMovimientos = newmovimientoList;
     },
+    setRubros: (state, action) => {
+      const { payload } = action;
+      state.rubros = payload;
+    }
   },
 });
 
@@ -38,5 +43,6 @@ export const {
   setFilteredMovimientos,
   addMovimiento,
   deleteMovimientoById,
+  setRubros
 } = movisSlice.actions;
 export default movisSlice.reducer;
