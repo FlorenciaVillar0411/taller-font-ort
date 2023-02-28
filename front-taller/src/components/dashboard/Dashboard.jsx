@@ -33,6 +33,8 @@ const Dashboard = (props, user) => {
       <section>
         <IngresoPorRubro></IngresoPorRubro>
         <GastoPorRubro></GastoPorRubro>
+      </section>
+      <section>
         <EvolucionGastos></EvolucionGastos>
         <Comparativo></Comparativo>
       </section>

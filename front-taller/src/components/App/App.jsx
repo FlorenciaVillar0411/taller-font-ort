@@ -8,6 +8,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+import PrivateRoute from '../privateRoute';
 
 const App = () => {
 
@@ -19,7 +20,9 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registry />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<PrivateRoute> 
+          <Dashboard></Dashboard>
+        </PrivateRoute>}/>
       </Routes>
     </ChakraProvider>
   );
