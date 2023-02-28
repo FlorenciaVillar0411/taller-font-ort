@@ -7,6 +7,9 @@ import { setLogoutUser } from '../../app/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 import './Dashboard.css';
+import IngresoPorRubro from './charts/IngresoPorRubro/IngresoPorRubro';
+import GastoPorRubro from './charts/GastosPorRubro/GastosPorRubro';
+import EvolucionGastos from './charts/evolucionGastos/EvolucionGastos';
 
 
 const Dashboard = (props, user) => {
@@ -24,7 +27,14 @@ const Dashboard = (props, user) => {
       <Movimientos></Movimientos>
       <AddGasto></AddGasto>
       <AddIngreso></AddIngreso>
-      <Button onClick={onLogOutClick}>LogOut</Button>
+      <section>
+        <IngresoPorRubro></IngresoPorRubro>
+        <GastoPorRubro></GastoPorRubro>
+        <EvolucionGastos></EvolucionGastos>
+      </section>
+      <section>
+        <Button onClick={onLogOutClick}>LogOut</Button>
+      </section>
     </div>
   );
 };
