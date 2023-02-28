@@ -7,9 +7,9 @@ import { setLogoutUser } from '../../app/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 import './Dashboard.css';
-import IngresoPorRubro from './charts/IngresoPorRubro/IngresoPorRubro';
-import GastoPorRubro from './charts/GastosPorRubro/GastosPorRubro';
-import EvolucionGastos from './charts/evolucionGastos/EvolucionGastos';
+import IngresoPorRubro from './analisis/IngresoPorRubro/IngresoPorRubro';
+import GastoPorRubro from './analisis/GastosPorRubro/GastosPorRubro';
+import EvolucionGastos from './analisis/evolucionGastos/EvolucionGastos';
 
 
 const Dashboard = (props, user) => {

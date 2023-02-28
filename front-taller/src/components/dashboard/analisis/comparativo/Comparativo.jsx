@@ -1,10 +1,9 @@
-import BarChartMovs from "../../../../utils/charts/BarChart/BarChart";
 import {useSelector } from 'react-redux';
 import { Heading } from "@chakra-ui/react";
 import LineChartMovs from "../../../../utils/charts/lineChart/LineChart";
 
 
-const EvolucionGastos = (props) => {
+const Comparativo = (props) => {
     const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 
     const movis = useSelector((state) => state.movis.movimientos);
@@ -26,11 +25,11 @@ const EvolucionGastos = (props) => {
     }
 
   return (
-    <div className='evolucionGastos'>
+    <div className='comparativo'>
         <Heading>Gastos Por Rubro</Heading>
         <LineChartMovs data={data}></LineChartMovs>
     </div>
   );
 };
 
-export default EvolucionGastos;
+export default Comparativo;
