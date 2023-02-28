@@ -8,6 +8,9 @@ import './Login.css';
 import {
   Card,
   CardHeader,
+  Alert,
+  AlertIcon,
+  AlertTitle,
   CardBody,
   Stack,
   Text,
@@ -32,7 +35,7 @@ const Login = (props) => {
     const userName = inputUsername.current.value;
     const password = inputPassword.current.value;
 
-    if (userName !== '' && password !== '') {
+    if (userName && password) {
       setDesactivado(false);
     } else {
       setDesactivado(true);
@@ -103,10 +106,17 @@ const Login = (props) => {
               </Link>
             </Text>
             <br />
-            <Button onClick={onLogInClick} disabled={btnDesactivado}>
+            <Button type='submit' onClick={onLogInClick} disabled={btnDesactivado}>
               Submit
             </Button>
-            {error ? <p className="error"> Se ha producido un error</p> : ''}
+            {error ? (
+            <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>Debe completar todos los campos</AlertTitle>
+          </Alert>
+          ) : (
+            ''
+          )}
           </Stack>
         </CardBody>
       </Card>

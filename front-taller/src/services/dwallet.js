@@ -35,7 +35,7 @@ const registro = async (user, pass, depto, ciudad) => {
 
 const postRegistro = async (user, pass, depto, ciudad) => {
   const headers = getHeaders('');
-  const {data} = await axios.post(`${BASE_URL}/usuarios.php`, {
+  const {data} = await axios.post(`${BASE_URL}https://dwallet.develotion.com/usuarios.php`, {
     usuario: user,
     password: pass,
     idDepartamento: depto,

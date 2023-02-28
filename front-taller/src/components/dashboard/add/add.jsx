@@ -1,4 +1,7 @@
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
     Box,
     Button,
     Card,
@@ -22,12 +25,21 @@ import { addMovimiento } from '../../../app/slices/movisSlice';
   
   const Add = (props) => {
 
+    const [error, setError] = useState(false)
+
     const medios = ['Efectivo', 'Debito','Credito'];
     const user = useSelector((state) => state.user.loggedUser);
 
 
     const [btnFormDisable, setBtnFormDisable] = useState(true);
     const dispatch = useDispatch();
+
+    const showError = () => {
+      setError(true)
+      setTimeout(() => {
+        setError(false)
+      }, 2000)
+    }
 
     const inputGastoRef = useRef()
     const inputRubroRef = useRef()
@@ -36,8 +48,8 @@ import { addMovimiento } from '../../../app/slices/movisSlice';
     const inputFechaRef = useRef()
 
     const validateInput = () => {
-        if(inputGastoRef.current.value !== ""){
-            setBtnFormDisable(false)
+      if(inputGastoRef.current.value && inputRubroRef && inputMedioRef && inputMontoRef && inputFechaRef){
+        setBtnFormDisable(false)
         }else{
             setBtnFormDisable(true)
         }
@@ -61,9 +73,9 @@ import { addMovimiento } from '../../../app/slices/movisSlice';
           dispatch(addMovimiento({...newMov, id: idMovimiento, rubro: props.rubros.find(r => r.id === newMov.categoria).nombre}));
         }
     }else{
-        alert('hubo un error')
+      showError()
     }
-    //setBtnFormDisable(false)
+
 }
 
     return (
@@ -75,8 +87,8 @@ import { addMovimiento } from '../../../app/slices/movisSlice';
             <FormControl isRequired>
               <Grid templateColumns="repeat(3, 1fr)" gap={6}>
                 <GridItem w="100%" h="10">
-                <FormLabel>Concepto</FormLabel>
-                  <Input type="text" placeholder="Concepto" ref={inputGastoRef}/>
+                  <FormLabel>Concepto</FormLabel>
+                  <Input type="text" placeholder="Concepto" ref={inputGastoRef} onChange={validateInput}/>                
                 </GridItem>
                 <GridItem w="100%" h="10">
                 <FormLabel>Rubro</FormLabel>
@@ -115,6 +127,14 @@ import { addMovimiento } from '../../../app/slices/movisSlice';
                 <Button onClick={onAddClick}>
               Submit
             </Button>
+            {error ? (
+            <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>Debe completar todos los campos</AlertTitle>
+          </Alert>
+          ) : (
+            ''
+          )}
                 </GridItem>
                 </Grid>
                 </FormControl>

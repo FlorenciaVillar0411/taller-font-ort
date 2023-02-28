@@ -17,7 +17,9 @@ const App = () => {
   return (
     <ChakraProvider className="App">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<PrivateRoute> 
+          <Dashboard></Dashboard>
+        </PrivateRoute>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registry />} />
         <Route path="/dashboard" element={<PrivateRoute> 
