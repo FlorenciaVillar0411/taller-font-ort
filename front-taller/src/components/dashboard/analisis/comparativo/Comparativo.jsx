@@ -1,33 +1,36 @@
 import {useSelector } from 'react-redux';
-import { Heading } from "@chakra-ui/react";
-import LineChartMovs from "../../../../utils/charts/lineChart/LineChart";
+import { Heading, Select } from "@chakra-ui/react";
+import { useRef, useState } from 'react';
 
 
 const Comparativo = (props) => {
-    const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 
     const movis = useSelector((state) => state.movis.movimientos);
-    const rubrosGasto = useSelector((state) => state.movis.rubros).filter(r => r.tipo === 'gasto');
-    const today = new Date();
-    const date = new Date((today.getFullYear() - 2), 0, 1);
-    let data = [];
-    while(date < today){
-        let montoMes = 0;
-        movis.forEach(m => {
-            if(rubrosGasto.find(r => r.nombre === m.rubro 
-                && new Date(m.fecha).getMonth() === date.getMonth() 
-                && date.getFullYear() === new Date(m.fecha).getFullYear())){
-                montoMes += m.total;
-            }
-        });
-        data.push({mes: `${meses[date.getMonth()]} / ${date.getFullYear()}`, monto: montoMes});
-        date.setMonth( date.getMonth() + 1);
+    const rubros = useSelector((state) => state.movis.rubros);
+    const inputRubro = useRef();
+    const [info, setRubro] = useState({rubro: 'rubro', pesos: '0000', diferencia: 'mas'});
+
+    const calculateRubro = () => {
+        const movsRubro = movis.filter(m => m.rubro === inputRubro.current.value);
+        const max = movsRubro?.reduce(function (a, b) { return a.fecha > b.fecha ? a : b; });
+        const penMax = movsRubro?.filter(m => m.id !== max.id).reduce(function (a, b) { return a > b ? a : b; });
+        console.log(movsRubro, max, penMax)
+        setRubro({rubro: inputRubro.current.value, pesos: Math.abs(max.total - penMax.total), diferencia: (max.total > penMax.total) ? 'mas' : (max.total < penMax.total )? 'menor' : 'igual'})
     }
 
   return (
     <div className='comparativo'>
         <Heading>Gastos Por Rubro</Heading>
-        <LineChartMovs data={data}></LineChartMovs>
+        <Select onChange={calculateRubro} ref={inputRubro}>{rubros?.map((item, index) => {
+                return (
+                  <option key={item.id} value={item.nombre}>
+                    {item.nombre}
+                  </option>
+                );
+              })}</Select>
+        <p>Para el rubro <strong>{info.rubro}</strong>, en la
+última compra has gastado <strong>${info.pesos}</strong> pesos <strong>{info.diferencia}</strong> que en la
+penúltima</p>
     </div>
   );
 };

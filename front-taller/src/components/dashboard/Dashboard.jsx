@@ -10,6 +10,7 @@ import './Dashboard.css';
 import IngresoPorRubro from './analisis/IngresoPorRubro/IngresoPorRubro';
 import GastoPorRubro from './analisis/GastosPorRubro/GastosPorRubro';
 import EvolucionGastos from './analisis/evolucionGastos/EvolucionGastos';
+import Comparativo from './analisis/comparativo/Comparativo';
 
 
 const Dashboard = (props, user) => {
@@ -31,6 +32,7 @@ const Dashboard = (props, user) => {
         <IngresoPorRubro></IngresoPorRubro>
         <GastoPorRubro></GastoPorRubro>
         <EvolucionGastos></EvolucionGastos>
+        <Comparativo></Comparativo>
       </section>
       <section>
         <Button onClick={onLogOutClick}>LogOut</Button>
