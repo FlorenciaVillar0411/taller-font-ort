@@ -1,5 +1,5 @@
 import './Registry.css';
-import { getCiudades, getDeptos, registro } from '../../services/dwallet';
+import { getCiudades, getDeptos, postRegistro, registro } from '../../services/dwallet';
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -70,7 +70,7 @@ const Registry = () => {
 
     if (userName && password && ciudad && depto && password === password2) {
       console.log(userName, password, +depto, +ciudad);
-      await registro(userName, password, +depto, +ciudad);
+      await postRegistro(userName, password, +depto, +ciudad);
       navigator('/login');
     } else {
       mostrarError();

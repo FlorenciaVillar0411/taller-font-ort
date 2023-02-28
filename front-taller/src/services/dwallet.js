@@ -33,6 +33,17 @@ const registro = async (user, pass, depto, ciudad) => {
   return manejarRespuesta(res);
 };
 
+const postRegistro = async (user, pass, depto, ciudad) => {
+  const headers = getHeaders('');
+  const {data} = await axios.post(`${BASE_URL}/usuarios.php`, {
+    usuario: user,
+    password: pass,
+    idDepartamento: depto,
+    idCiudad: ciudad,
+  }, { headers });
+  return data;
+};
+
 const getCiudades = async (idDepto = '') => {
   const res = await axios.get(
     `${BASE_URL}/ciudades.php${idDepto ? '?idDepartamento=' + idDepto : ''}`
@@ -96,4 +107,5 @@ export {
   getMovimientos,
   postMovimiento,
   getRubros,
+  postRegistro
 };
