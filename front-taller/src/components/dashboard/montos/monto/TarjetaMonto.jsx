@@ -1,8 +1,18 @@
+import { Card, CardBody, CardHeader } from "@chakra-ui/card";
+import { Heading } from "@chakra-ui/react";
+import './tarjetaMonto.css'
+
 const TarjetaMonto = (props) => {
 
     
 
-    return <div> Monto Total : {props.monto}</div>
+    return <Card className="tarjeta-monto"> 
+        <CardHeader><Heading>{props.nombre}</Heading></CardHeader>
+        <CardBody>
+
+        $ {props.monto}
+        </CardBody>
+        </Card>
 
     
 }
