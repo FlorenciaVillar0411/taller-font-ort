@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
   Card,
   CardHeader,
   CardBody,
@@ -32,7 +35,7 @@ const Login = (props) => {
     const userName = inputUsername.current.value;
     const password = inputPassword.current.value;
 
-    if (userName !== '' && password !== '') {
+    if (userName && password !== '') {
       setDesactivado(false);
     } else {
       setDesactivado(true);
@@ -46,14 +49,14 @@ const Login = (props) => {
     const userName = inputUsername.current.value;
     const password = inputPassword.current.value;
 
-   
-
+  
     const mostrarError = () => {
       setError(true);
       setTimeout(() => {
         setError(false);
       }, 4500);
     };
+    
 
     if (userName && password) {
       //esto es para que mientras se este enviando el boton quede deshabilitado
@@ -106,7 +109,14 @@ const Login = (props) => {
             <Button onClick={onLogInClick} disabled={btnDesactivado}>
               Submit
             </Button>
-            {error ? <p className="error"> Se ha producido un error</p> : ''}
+            {error ? (
+            <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>Debe completar todos los campos</AlertTitle>
+          </Alert>
+          ) : (
+            ''
+          )}
           </Stack>
         </CardBody>
       </Card>
