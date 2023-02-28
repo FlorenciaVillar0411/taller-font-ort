@@ -7,8 +7,10 @@ import Dashboard from '../dashboard/Dashboard';
 import { ChakraProvider } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const App = () => {
+
   const loggedUser = useSelector((state) => state.user.loggedUser);
 
   return (
