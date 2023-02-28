@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import Montos from './montos/Montos';
 
 import './Dashboard.css';
+import IngresoPorRubro from './analisis/IngresoPorRubro/IngresoPorRubro';
+import GastoPorRubro from './analisis/GastosPorRubro/GastosPorRubro';
+import EvolucionGastos from './analisis/evolucionGastos/EvolucionGastos';
+import Comparativo from './analisis/comparativo/Comparativo';
 
 
 const Dashboard = (props, user) => {
@@ -26,7 +30,15 @@ const Dashboard = (props, user) => {
       <AddGasto></AddGasto>
       <AddIngreso></AddIngreso>
       <Montos></Montos>
-      <Button onClick={onLogOutClick}>LogOut</Button>
+      <section>
+        <IngresoPorRubro></IngresoPorRubro>
+        <GastoPorRubro></GastoPorRubro>
+        <EvolucionGastos></EvolucionGastos>
+        <Comparativo></Comparativo>
+      </section>
+      <section>
+        <Button onClick={onLogOutClick}>LogOut</Button>
+      </section>
     </div>
   );
 };
