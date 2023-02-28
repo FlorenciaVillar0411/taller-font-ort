@@ -5,6 +5,7 @@ import AddIngreso from './agregarIngreso/AddIngreso';
 import { useDispatch } from 'react-redux';
 import { setLogoutUser } from '../../app/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import Montos from './montos/Montos';
 
 import './Dashboard.css';
 
@@ -24,6 +25,7 @@ const Dashboard = (props, user) => {
       <Movimientos></Movimientos>
       <AddGasto></AddGasto>
       <AddIngreso></AddIngreso>
+      <Montos></Montos>
       <Button onClick={onLogOutClick}>LogOut</Button>
     </div>
   );

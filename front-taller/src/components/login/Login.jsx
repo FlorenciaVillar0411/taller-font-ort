@@ -18,6 +18,8 @@ import {
 } from '@chakra-ui/react';
 
 const Login = (props) => {
+
+
   const [error, setError] = useState();
   const [btnDesactivado, setDesactivado] = useState(true);
 
@@ -38,8 +40,13 @@ const Login = (props) => {
   };
 
   const onLogInClick = async ({ onLogin }) => {
+
+   
+
     const userName = inputUsername.current.value;
     const password = inputPassword.current.value;
+
+   
 
     const mostrarError = () => {
       setError(true);
@@ -63,6 +70,9 @@ const Login = (props) => {
       mostrarError();
     }
   };
+
+
+
   return (
     <div className="login">
       <Card class="card">

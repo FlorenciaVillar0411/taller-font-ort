@@ -1,5 +1,10 @@
-const TarjetaMonto = () => {
-    return <div> Monto : 1245</div>
+const TarjetaMonto = (props) => {
+
+    
+
+    return <div> Monto Total : {props.monto}</div>
+
+    
 }
 
 export default TarjetaMonto;
